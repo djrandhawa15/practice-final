@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Authors</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body class="section">
+  <div class="container">
+    <nav class="level mb-4">
+      <div class="level-left">
+        <div class="level-item">
+          <a class="button is-light" href="/">
+            <i class="fas fa-home"></i>&nbsp; Home
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <h1 class="title is-2 has-text-centered">📚 Author Directory</h1>
+
+    <div class="box">
+      <h2 class="subtitle is-4">Add New Author</h2>
+      <form method="POST" action="/addAuthor">
+        <div class="columns">
+          <div class="column">
+            <input class="input" name="first_name" placeholder="First Name" required>
+          </div>
+          <div class="column">
+            <input class="input" name="last_name" placeholder="Last Name" required>
+          </div>
+          <div class="column">
+            <input class="input" type="date" name="birth_date" placeholder="Birth Date">
+          </div>
+          <div class="column is-narrow">
+            <button class="button is-success">Add Author</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <table class="table is-striped is-hoverable is-fullwidth">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Birth Date</th>
+          <th>Total Books</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% authors.forEach(author => { %>
+          <tr>
+            <td><%= author.first_name %> <%= author.last_name %></td>
+            <td><%= author.birth_date ? author.birth_date.toISOString().split('T')[0] : '' %></td>
+            <td><%= author.book_count %></td>
+            <td>
+              <a href="/showBooks?id=<%= author.author_id %>" class="button is-small is-link" title="View Books">
+                <i class="fas fa-book"></i>
+              </a>
+              <form method="POST" action="/deleteAuthor" style="display:inline-block;">
+                <input type="hidden" name="author_id" value="<%= author.author_id %>">
+                <button class="button is-small is-danger" title="Delete Author">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

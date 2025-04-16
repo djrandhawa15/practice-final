@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Books</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body class="section">
+  <div class="container">
+    <nav class="level mb-4">
+      <div class="level-left">
+        <div class="level-item">
+          <a class="button is-light" href="/">
+            <i class="fas fa-arrow-left"></i>&nbsp; Back to Authors
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <h1 class="title is-2 has-text-centered">
+      📖 Books by <%= author.first_name %> <%= author.last_name %>
+    </h1>
+
+    <div class="box">
+      <h2 class="subtitle is-4">Add New Book</h2>
+      <form method="POST" action="/addBook">
+        <input type="hidden" name="author_id" value="<%= authorId %>">
+        <div class="field">
+          <label class="label">Title</label>
+          <div class="control">
+            <input class="input" name="title" placeholder="Book Title" required>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Description</label>
+          <div class="control">
+            <textarea class="textarea" name="description" placeholder="Description" required></textarea>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">ISBN</label>
+          <div class="control">
+            <input class="input" name="ISBN" placeholder="e.g. 978-3-16-148410-0" required>
+          </div>
+        </div>
+        <button class="button is-success">Add Book</button>
+      </form>
+    </div>
+
+    <table class="table is-striped is-hoverable is-fullwidth">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Description</th>
+          <th>ISBN</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% books.forEach(book => { %>
+          <tr>
+            <td><%= book.title %></td>
+            <td><%= book.description %></td>
+            <td><%= book.ISBN %></td>
+            <td>
+              <form method="POST" action="/deleteBook" style="display:inline-block;">
+                <input type="hidden" name="book_id" value="<%= book.book_id %>">
+                <input type="hidden" name="author_id" value="<%= authorId %>">
+                <button class="button is-small is-danger" title="Delete Book">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

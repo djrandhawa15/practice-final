@@ -11,7 +11,7 @@ if (process.env.IS_HOSTED === "1") {
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
-    ssl: true // Use default SSL without custom cert
+    ssl: {} 
   });
 } else {
   // Local setup
