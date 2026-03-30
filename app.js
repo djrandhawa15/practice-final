@@ -1,6 +1,7 @@
 const express = require("express");
 const pool = require("./db");
 const path = require("path");
+const seedDatabase = require("./seed");
 require("dotenv").config();
 
 const app = express();
@@ -62,6 +63,13 @@ app.post("/deleteBook", async (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`App running on port ${PORT}`);
+
+// Seed database on startup, then start server
+seedDatabase().then(() => {
+  app.listen(PORT, () => {
+    console.log(`App running on port ${PORT}`);
+  });
+}).catch((error) => {
+  console.error("Failed to seed database:", error);
+  process.exit(1);
 });
