@@ -2,14 +2,6 @@ const pool = require("./db");
 
 async function seedDatabase() {
   try {
-    // Check if author table exists and has data
-    const [authors] = await pool.query("SELECT COUNT(*) as count FROM author");
-    
-    if (authors[0].count > 0) {
-      console.log("Database already seeded, skipping...");
-      return;
-    }
-
     console.log("Seeding database...");
 
     // Create author table if doesn't exist
@@ -33,6 +25,16 @@ async function seedDatabase() {
         FOREIGN KEY (author_id) REFERENCES author(author_id)
       )
     `);
+
+    // Check if author table has data
+    const [authors] = await pool.query("SELECT COUNT(*) as count FROM author");
+    
+    if (authors[0].count > 0) {
+      console.log("Database already seeded, skipping...");
+      return;
+    }
+
+    console.log("Inserting seed data...");
 
     // Seed authors
     await pool.query(`
