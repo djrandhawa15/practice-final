@@ -62,6 +62,22 @@ app.post("/deleteBook", async (req, res) => {
   res.redirect(`/showBooks?id=${author_id}`);
 });
 
+app.get("/api/seed", async (req, res) => {
+  try {
+    // Delete all existing book and author data
+    await pool.query("DELETE FROM book");
+    await pool.query("DELETE FROM author");
+    
+    // Run seed function
+    await seedDatabase();
+    
+    res.json({ success: true, message: "Database reseeded successfully!" });
+  } catch (error) {
+    console.error("Error reseeding database:", error);
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
 const PORT = process.env.PORT || 3000;
 
 // Seed database on startup, then start server
