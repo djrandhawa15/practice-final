@@ -69,6 +69,7 @@ app.get("/api/seed", async (req, res) => {
     // Delete all existing book and author data
     await pool.query("DELETE FROM book");
     await pool.query("DELETE FROM author");
+    await pool.query("ALTER TABLE author AUTO_INCREMENT = 1");
     
     console.log("Data deleted, inserting fresh seed data...");
 
