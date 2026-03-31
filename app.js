@@ -96,7 +96,7 @@ app.get("/api/seed", async (req, res) => {
       (3, 'Tender Is the Night', 'A novel about American expatriates', '978-0743273672'),
       (4, 'To Kill a Mockingbird', 'A classic about racial injustice', '978-0061120084'),
       (4, 'Go Set a Watchman', 'A sequel to To Kill a Mockingbird', '978-0062409256'),
-      (5, 'Harry Potter and the Philosopher\'s Stone', 'The start of a magical series', '978-0747532699'),
+      (5, 'Harry Potter and the Philosopher''s Stone', 'The start of a magical series', '978-0747532699'),
       (5, 'Harry Potter and the Chamber of Secrets', 'The second book in the series', '978-0747538494'),
       (5, 'Harry Potter and the Prisoner of Azkaban', 'The third book in the series', '978-0747542155'),
       (5, 'Harry Potter and the Goblet of Fire', 'The fourth book in the series', '978-0747546245')
