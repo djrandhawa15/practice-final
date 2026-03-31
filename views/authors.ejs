@@ -56,12 +56,12 @@
             <td><%= author.book_count %></td>
             <td>
               <a href="/showBooks?id=<%= author.author_id %>" class="button is-small is-link" title="View Books">
-                <i class="fas fa-book"></i>
+                <i class="fas fa-book"></i>&nbsp; View Books
               </a>
               <form method="POST" action="/deleteAuthor" style="display:inline-block;">
                 <input type="hidden" name="author_id" value="<%= author.author_id %>">
                 <button class="button is-small is-danger" title="Delete Author">
-                  <i class="fas fa-trash"></i>
+                  <i class="fas fa-trash"></i>&nbsp; Delete
                 </button>
               </form>
             </td>
